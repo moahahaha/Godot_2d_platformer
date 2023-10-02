@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b0apttcfupriy"]
+[gd_scene load_steps=18 format=3 uid="uid://b0apttcfupriy"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_d7aim"]
 [ext_resource type="Texture2D" uid="uid://j6t7cvdsf12x" path="res://dino run.png" id="2_erpb2"]
@@ -90,7 +90,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vkeyh"]
 size = Vector2(16, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bckdt"]
+size = Vector2(10, 16)
+
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 floor_stop_on_slope = false
 floor_constant_speed = true
 floor_snap_length = 3.0
@@ -98,7 +102,7 @@ script = ExtResource("1_d7aim")
 movement_data = ExtResource("2_uqbqw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1.5, -8)
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_wyg6n")
 animation = &"jump"
 frame_progress = 0.598805
@@ -113,3 +117,15 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -32)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="HazardDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardDetector"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_bckdt")
+
+[connection signal="area_entered" from="HazardDetector" to="." method="_on_hazard_detector_area_entered"]

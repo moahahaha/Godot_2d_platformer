@@ -1,7 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ko8br8bd7h04"]
+[gd_scene load_steps=14 format=3 uid="uid://ko8br8bd7h04"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_44sb5"]
 [ext_resource type="PackedScene" uid="uid://b0apttcfupriy" path="res://player.tscn" id="2_3mvry"]
+[ext_resource type="PackedScene" uid="uid://c8lc1l2mgepmo" path="res://spikes.tscn" id="3_c1ypc"]
+[ext_resource type="PackedScene" uid="uid://doc05siv2vocn" path="res://heart.tscn" id="4_2vohl"]
+[ext_resource type="PackedScene" uid="uid://dt6py6t4shou6" path="res://level_completed.tscn" id="5_8asrh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4aceq"]
 size = Vector2(16, 104)
@@ -32,17 +35,20 @@ script = ExtResource("1_44sb5")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 224)
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 position = Vector2(0, -224)
-polygon = PackedVector2Array(-192, -704, 0, -704, 0, 112, 40, 112, 80, 144, 104, 144, 104, 128, 136, 128, 136, 152, 168, 152, 168, 112, 192, 112, 192, 152, 224, 152, 224, 88, 248, 88, 248, 152, 288, 120, 320, 120, 320, -704, 512, -704, 512, 320, -192, 320)
+polygon = PackedVector2Array(-192, -704, 0, -704, 0, 112, 40, 112, 88, 152, 104, 152, 104, 128, 136, 128, 136, 152, 168, 152, 168, 112, 192, 112, 192, 152, 224, 152, 224, 88, 248, 88, 248, 152, 272, 152, 288, 120, 320, 120, 320, -704, 512, -704, 512, 320, -192, 320)
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]
+color = Color(0.419608, 0.282353, 0.0627451, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_3mvry")]
-position = Vector2(48, 104)
+position = Vector2(24, 96)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(240, -36)
@@ -54,15 +60,23 @@ offset_top = 84.0
 offset_right = 40.0
 offset_bottom = 100.0
 
+[node name="ColorRect2" type="ColorRect" parent="StaticBody2D2/CollisionShape2D"]
+offset_left = -8.0
+offset_top = -52.0
+offset_right = 8.0
+offset_bottom = 52.0
+color = Color(0.419608, 0.282353, 0.0627451, 1)
+
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(272, 56)
 shape = SubResource("RectangleShape2D_n3nyc")
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D2/CollisionShape2D2"]
-offset_left = -40.0
-offset_top = -144.0
-offset_right = -24.0
-offset_bottom = -40.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(0.419608, 0.282353, 0.0627451, 1)
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(288, -72)
@@ -73,6 +87,7 @@ offset_left = -8.0
 offset_top = -56.0
 offset_right = 8.0
 offset_bottom = 56.0
+color = Color(0.419608, 0.282353, 0.0627451, 1)
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(212, -80)
@@ -83,6 +98,7 @@ offset_left = -20.0
 offset_top = -8.0
 offset_right = 20.0
 offset_bottom = 8.0
+color = Color(0.419608, 0.282353, 0.0627451, 1)
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(144, -64)
@@ -93,6 +109,7 @@ offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
+color = Color(0.419608, 0.282353, 0.0627451, 1)
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(96, -48)
@@ -103,6 +120,7 @@ offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
+color = Color(0.419608, 0.282353, 0.0627451, 1)
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(48, -16)
@@ -113,6 +131,7 @@ offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
+color = Color(0.419608, 0.282353, 0.0627451, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D8" type="CollisionShape2D" parent="StaticBody2D2"]
@@ -124,3 +143,74 @@ offset_left = -8.0
 offset_top = -36.0
 offset_right = 8.0
 offset_bottom = 36.0
+color = Color(0.419608, 0.282353, 0.0627451, 1)
+
+[node name="Spikes" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(136, 152)
+
+[node name="Spikes2" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(144, 152)
+
+[node name="Spikes3" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(152, 152)
+
+[node name="Spikes4" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(160, 152)
+
+[node name="Spikes5" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(88, 152)
+
+[node name="Spikes6" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(96, 152)
+
+[node name="Spikes7" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(192, 152)
+
+[node name="Spikes8" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(200, 152)
+
+[node name="Spikes9" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(208, 152)
+
+[node name="Spikes10" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(216, 152)
+
+[node name="Spikes11" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(248, 152)
+
+[node name="Spikes12" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(256, 152)
+
+[node name="Spikes13" parent="." instance=ExtResource("3_c1ypc")]
+position = Vector2(264, 152)
+
+[node name="Heart7" parent="." instance=ExtResource("4_2vohl")]
+position = Vector2(120, 120)
+
+[node name="Heart" parent="." instance=ExtResource("4_2vohl")]
+position = Vector2(24, 56)
+
+[node name="Heart2" parent="." instance=ExtResource("4_2vohl")]
+position = Vector2(264, 120)
+
+[node name="Heart3" parent="." instance=ExtResource("4_2vohl")]
+position = Vector2(264, -24)
+
+[node name="Heart4" parent="." instance=ExtResource("4_2vohl")]
+position = Vector2(288, -136)
+
+[node name="Heart5" parent="." instance=ExtResource("4_2vohl")]
+position = Vector2(96, -64)
+
+[node name="Heart6" parent="." instance=ExtResource("4_2vohl")]
+position = Vector2(16, -80)
+
+[node name="Heart8" parent="." instance=ExtResource("4_2vohl")]
+position = Vector2(176, -24)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LevelCompleted" parent="CanvasLayer" instance=ExtResource("5_8asrh")]
+visible = false
+anchor_bottom = 0.978
+offset_bottom = 3.95999
