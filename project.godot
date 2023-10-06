@@ -11,12 +11,13 @@ config_version=5
 [application]
 
 config/name="2d platformer heartbeast"
-run/main_scene="res://world.tscn"
+run/main_scene="res://level_one.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 
 [autoload]
 
 Events="*res://Events.gd"
+LevelTransition="*res://level_transition.tscn"
 
 [display]
 
